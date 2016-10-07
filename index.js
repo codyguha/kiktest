@@ -75,6 +75,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .setLoop(true)
           .setAutoplay(true)
           .setAttributionIcon('http://icons.iconarchive.com/icons/icons8/ios7/128/Animals-Chicken-icon.png')
+          .addTextResponse(`My results from survey`)
           results.update({user: user.username}, { $set: { hungry: incoming.body } })
       return incoming.reply([hifive, message])
     });
