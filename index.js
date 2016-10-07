@@ -203,12 +203,11 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
       return incoming.reply(info)
     });  
   });
-
-});
-
-
-
 // Set up your server and start listening
 let server = http
     .createServer(bot.incoming())
     .listen(process.env.PORT || 8080);
+});
+
+
+
