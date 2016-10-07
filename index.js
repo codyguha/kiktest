@@ -16,7 +16,7 @@ var seedData = [
     mood: "",
     preference: ""
   }
-}
+]
 
 mongodb.MongoClient.connect(uri, function(err, db) {
   
