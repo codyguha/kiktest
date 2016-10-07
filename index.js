@@ -13,8 +13,8 @@ let bot = new Bot({
 
 bot.updateBotConfiguration();
 
-survey_result = {}
-results = []
+const survey_result = {}
+const results = []
 
 bot.onTextMessage(/Hi$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
