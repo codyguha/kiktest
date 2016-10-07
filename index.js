@@ -5,7 +5,7 @@ let util = require('util');
 let http = require('http');
 let Bot  = require('@kikinteractive/kik');
 
-var uri = 'mongodb://<dbuser>:<dbpassword>@ds053216.mlab.com:53216/heroku_w9p37vp9';
+var uri = 'mongodb://heroku_w9p37vp9:3huc3hgd51uauubr921v8ctb4l@ds053216.mlab.com:53216/heroku_w9p37vp9';
 
 var seedData = [
   {
