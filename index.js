@@ -75,8 +75,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .setLoop(true)
           .setAutoplay(true)
           .setAttributionIcon('http://icons.iconarchive.com/icons/icons8/ios7/128/Animals-Chicken-icon.png')
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.hungry = incoming.body
+          results.update({user: user.username}, { $set: { hungry: incoming.body } })
       return incoming.reply([hifive, message])
     });
   });
@@ -90,10 +89,6 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`Not really my thing`)
           .addTextResponse(`I’ll die before I eat fried chicken`)
           results.insert({user: user.username})
-        // survey_result.user = user.username
-        // results.push(survey_result)
-        // survey_result = {}
-        // console.log(results)
       return incoming.reply(message)
     });
   });
@@ -106,9 +101,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`KFC is my go to`)
           .addTextResponse(`Any fried chicken is good chicken`)
           .addTextResponse(`It's a secret and I’m not telling you`)
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.relationship = incoming.body
-      console.log(foundObject)
+      results.update({user: user.username}, { $set: { relationship: incoming.body } })
       return incoming.reply(message);
     });
   });
@@ -120,9 +113,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`After a night of hard partying`)
           .addTextResponse(`A treat if I’ve been eating good for while`)
           .addTextResponse(`It’s a personal matter`)
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.relationship = incoming.body
-      console.log(foundObject)
+      results.update({user: user.username}, { $set: { relationship: incoming.body } })
       return incoming.reply(message)
     });
   });
@@ -134,9 +125,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`Chicken is God’s creature and shouldn’t be eaten`)
           .addTextResponse(`Fried food is gross`)
           .addTextResponse(`I’m not going to get into it`)
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.relationship = incoming.body
-      console.log(foundObject)
+      results.update({user: user.username}, { $set: { relationship: incoming.body } })
       return incoming.reply(message)
     });
   });
@@ -149,9 +138,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`😊`)
           .addTextResponse(`😞`)
           .addTextResponse(`😠`)
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.detail = incoming.body
-      console.log(foundObject)
+      results.update({user: user.username}, { $set: { detail: incoming.body } })
       return incoming.reply(message);
     });  
   });
@@ -176,9 +163,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse('Double Down')
           .addTextResponse('Fried Drumsticks')
           .addTextResponse('Chicken Nuggets')
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.mood = incoming.body
-      console.log(foundObject)
+      results.update({user: user.username}, { $set: { mood: incoming.body } })
       return incoming.reply([pic1, pic2, pic3, pic4, message]);
     });
   });
@@ -189,9 +174,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
         const message = Bot.Message.text(`Have we made you hungry answering these questions?`)
         .addTextResponse(`YES!`)
         .addTextResponse(`no, I ate`)
-      var foundObject = _.findWhere(results, {user: user.username});
-      foundObject.preference = incoming.body
-      console.log(foundObject)
+      results.update({user: user.username}, { $set: { preference: incoming.body } })
       return incoming.reply(message)
     });  
   });
@@ -199,7 +182,13 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         var foundObject = _.findWhere(results, {user: user.username});
-        const info = Bot.Message.text(`Your relationship with chicken is "${foundObject.relationship}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
+        results.find({ user: user.username }).toArray(function (err, docs) {
+        	if(err) throw err;
+        // const info = Bot.Message.text(`Your relationship with chicken is "${doc['relationship']}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
+        	const info = Bot.Message.text(`Your name is ` + doc[user])
+
+          });
+        
       return incoming.reply(info)
     });  
   });
