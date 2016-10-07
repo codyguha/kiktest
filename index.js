@@ -182,15 +182,14 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
   bot.onTextMessage(/My results from survey$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        var foundObject = _.findWhere(results, {user: user.username});
         results.find({ user: user.username }).toArray(function (err, docs) {
         	if(err) throw err;
         // const info = Bot.Message.text(`Your relationship with chicken is "${doc['relationship']}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
-        	const info = Bot.Message.text(`Your name is ` + doc[user])
-
+        	const info = Bot.Message.text(`Your name is ` + doc['user'])
+        		return incoming.reply(info)
           });
         
-      return incoming.reply(info)
+      
     });  
   });
 // Set up your server and start listening
