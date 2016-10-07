@@ -13,8 +13,6 @@ let bot = new Bot({
 
 bot.updateBotConfiguration();
 
-const survey_result = {}
-const results = []
 
 bot.onTextMessage(/Hi$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
@@ -67,10 +65,10 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`It's a guilty pleasure`)
           .addTextResponse(`Not really my thing`)
           .addTextResponse(`I’ll die before I eat fried chicken`)
-        survey_result.user = user.username
-        results.push(survey_result)
-        survey_result = {}
-        console.log(results)
+        // survey_result.user = user.username
+        // results.push(survey_result)
+        // survey_result = {}
+        // console.log(results)
       return incoming.reply(message)
     });
   });
