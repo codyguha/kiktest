@@ -28,8 +28,6 @@ mongodb.MongoClient.connect(uri, function(err, db) {
     
     		if(err) throw err;
 		});
-});
-
 // Configure the bot API endpoint, details for your bot
 let bot = new Bot({
     username: 'surveychicken',
@@ -205,6 +203,10 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
       return incoming.reply(info)
     });  
   });
+
+});
+
+
 
 // Set up your server and start listening
 let server = http
