@@ -1,8 +1,33 @@
 'use strict';
 var _ = require( "underscore" );
+var mongodb = require('mongodb');
 let util = require('util');
 let http = require('http');
 let Bot  = require('@kikinteractive/kik');
+
+var uri = 'mongodb://<dbuser>:<dbpassword>@ds053216.mlab.com:53216/heroku_w9p37vp9';
+
+var seedData = [
+  {
+    user: "cody",
+    hungry: 'YES!',
+    relationship: 'You Light Up My Life',
+    detail: "10",
+    mood: "",
+    preference: ""
+  }
+}
+
+mongodb.MongoClient.connect(uri, function(err, db) {
+  
+  if(err) throw err;
+
+  var results = db.collection('results');
+
+  results.insert(seedData, function(err, result) {
+    
+    if(err) throw err;
+}
 
 // Configure the bot API endpoint, details for your bot
 let bot = new Bot({
@@ -65,6 +90,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
           .addTextResponse(`It's a guilty pleasure`)
           .addTextResponse(`Not really my thing`)
           .addTextResponse(`I’ll die before I eat fried chicken`)
+          results.insert({user: user.username})
         // survey_result.user = user.username
         // results.push(survey_result)
         // survey_result = {}
