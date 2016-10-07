@@ -1,0 +1,7 @@
+{
+  "name": "kiktest",
+  "version": "1.0.0",
+  "dependencies": {
+    "@kikinteractive/kik": "^2.0.11"
+  }
+}
