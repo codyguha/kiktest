@@ -8,7 +8,7 @@ let Bot  = require('@kikinteractive/kik');
 let bot = new Bot({
     username: 'surveychicken',
     apiKey: 'ea2ff779-c0cb-4ee8-9e22-377629a80c5d',
-    baseUrl: ''
+    baseUrl: 'https://infinite-atoll-38383.herokuapp.com/'
 });
 
 bot.updateBotConfiguration();
