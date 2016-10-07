@@ -187,7 +187,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
         // const info = Bot.Message.text(`Your relationship with chicken is "${doc['relationship']}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
         	const info = Bot.Message.text(user_results)
         		return incoming.reply(info)
-          } 
+          });
   });
 // Set up your server and start listening
 let server = http
