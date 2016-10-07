@@ -27,7 +27,7 @@ mongodb.MongoClient.connect(uri, function(err, db) {
   results.insert(seedData, function(err, result) {
     
     		if(err) throw err;
-		}
+		});
 });
 
 // Configure the bot API endpoint, details for your bot
