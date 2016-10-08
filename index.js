@@ -182,9 +182,8 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
   bot.onTextMessage(/My results from survey$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        var found = results.find({ user: user.username })
-        var user_results = JSON.stringify(found)
-        // const info = Bot.Message.text(`Your relationship with chicken is "${doc['relationship']}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
+        var foundObject = results.find({ user: user.username })
+        const info = Bot.Message.text(`Your relationship with chicken is "${foundObject.relationship}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
         	const info = Bot.Message.text(user_results)
         		return incoming.reply(info)
           });
