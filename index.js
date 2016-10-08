@@ -70,7 +70,6 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Thanks for your time. Say "hi" to take the survey again`)
-        		.addTextResponse(`My results from survey`)
         const hifive = Bot.Message.video(`http://media.giphy.com/media/uXNYDeQ20XWSs/giphy.gif`)
           .setAttributionName(' ')
           .setLoop(true)
@@ -179,14 +178,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
       return incoming.reply(message)
     });  
   });
-  bot.onTextMessage(/My results from survey$/i, (incoming, next) => {
-    bot.getUserProfile(incoming.from)
-      .then((user) => {
-        var foundObject = results.find({ user: user.username })
-        const info = Bot.Message.text(`Your relationship with chicken is "${foundObject.relationship}" and "${foundObject.detail}". You selected ${foundObject.preference} as what you would like to be eating right now. Your mood while doing survey was ${foundObject.mood}. And were you hungry after the survey ? "${foundObject.hungry}"`)
-               return incoming.reply(info)
-          });
-  });
+
 // Set up your server and start listening
 let server = http
     .createServer(bot.incoming())
