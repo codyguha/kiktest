@@ -61,7 +61,7 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
   bot.onTextMessage(/No thanks$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`ok ${user.firstName}! say "Hi" agian sometime `)
+        const message = Bot.Message.text(`ok ${user.firstName}! say "Hi" again sometime `)
         incoming.reply(message)
       });
   });
@@ -69,13 +69,13 @@ bot.onTextMessage(/Hi$/i, (incoming, next) => {
  bot.onTextMessage(/no, I ate|YES!$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Thanks for your time. Say "hi" or "GET chicken" to take the survey or get chicken.`)
+        const message = Bot.Message.text(`Thanks for your time. Say "hi" to take the survey again`)
+        		.addTextResponse(`My results from survey`)
         const hifive = Bot.Message.video(`http://media.giphy.com/media/uXNYDeQ20XWSs/giphy.gif`)
           .setAttributionName(' ')
           .setLoop(true)
           .setAutoplay(true)
           .setAttributionIcon('http://icons.iconarchive.com/icons/icons8/ios7/128/Animals-Chicken-icon.png')
-          .addTextResponse(`My results from survey`)
           results.update({user: user.username}, { $set: { hungry: incoming.body } })
       return incoming.reply([hifive, message])
     });
