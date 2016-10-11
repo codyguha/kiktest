@@ -57,6 +57,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           .addTextResponse(`No thanks`)
         incoming.reply(message)
       });
+    if (results.find({user: user.username}) === undefined) {
+    		results.insert({user: user.username})
+    }
   });
 
   bot.onScanDataMessage((incoming) => {
@@ -70,6 +73,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           .addTextResponse(`No thanks`)
         incoming.reply(message)
       });
+    if (results.find({user: user.username}) === undefined) {
+    		results.insert({user: user.username})
+    }
   });
 
   bot.onTextMessage(/No thanks$/i, (incoming, next) => {
@@ -108,9 +114,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           .addTextResponse(`It's a guilty pleasure`)
           .addTextResponse(`Not really my thing`)
           .addTextResponse(`I’ll die before I eat fried chicken`)
-        results.insert({
-          user: user.username
-        })
         return incoming.reply(message)
       });
   });
@@ -236,6 +239,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         return incoming.reply(message)
       });
   });
+
+
 
   let server = http
     .createServer(bot.incoming())
