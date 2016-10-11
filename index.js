@@ -93,7 +93,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            hungry: incoming.body
+            chicken_survey.hungry: incoming.body
           }
         })
         return incoming.reply([hifive, message])
@@ -126,8 +126,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         results.update({
           user: user.username
         }, {
-          $set: { {survey: 1}
-            relationship: incoming.body
+          $set: { 
+            chicken_survey.relationship: incoming.body
           }
         })
         return incoming.reply(message);
@@ -145,7 +145,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            relationship: incoming.body
+            chicken_survey.relationship: incoming.body
           }
         })
         return incoming.reply(message)
@@ -163,7 +163,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            relationship: incoming.body
+            chicken_survey.relationship: incoming.body
           }
         })
         return incoming.reply(message)
@@ -182,7 +182,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            detail: incoming.body
+            chicken_survey.detail: incoming.body
           }
         })
         return incoming.reply(message);
@@ -213,7 +213,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            mood: incoming.body
+            chicken_survey.mood: incoming.body
           }
         })
         return incoming.reply([pic1, pic2, pic3, pic4, message]);
@@ -230,7 +230,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            preference: incoming.body
+            chicken_survey.preference: incoming.body
           }
         })
         return incoming.reply(message)
