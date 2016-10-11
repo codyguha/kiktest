@@ -93,7 +93,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            chicken_survey.hungry: incoming.body
+            "chicken_survey.hungry": incoming.body
           }
         })
         return incoming.reply([hifive, message])
@@ -127,7 +127,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: { 
-            chicken_survey.relationship: incoming.body
+            "chicken_survey.relationship": incoming.body
           }
         })
         return incoming.reply(message);
@@ -145,7 +145,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            chicken_survey.relationship: incoming.body
+            "chicken_survey.relationship": incoming.body
           }
         })
         return incoming.reply(message)
@@ -163,7 +163,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            chicken_survey.relationship: incoming.body
+            "chicken_survey.relationship": incoming.body
           }
         })
         return incoming.reply(message)
@@ -182,7 +182,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            chicken_survey.detail: incoming.body
+            "chicken_survey.detail": incoming.body
           }
         })
         return incoming.reply(message);
@@ -213,7 +213,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            chicken_survey.mood: incoming.body
+            "chicken_survey.mood": incoming.body
           }
         })
         return incoming.reply([pic1, pic2, pic3, pic4, message]);
@@ -230,7 +230,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           user: user.username
         }, {
           $set: {
-            chicken_survey.preference: incoming.body
+            "chicken_survey.preference": incoming.body
           }
         })
         return incoming.reply(message)
