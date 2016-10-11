@@ -72,8 +72,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           .addTextResponse(`Another Survey`)
           .addTextResponse(`Another Poll`)
           .addTextResponse(`No thanks`)
-        results.insert({user: user.username})
         incoming.reply(message)
+        results.insert({user: user.username})
       });
   });
 
