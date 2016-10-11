@@ -36,9 +36,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Hi$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Hey ${user.firstName}! Please choose a survey to complete.`)
+        const message = Bot.Message.text(`Hello again ${user.firstName}! Please choose a survey to complete.`)
           .addTextResponse(`Chicken`)
-          .addTextResponse(`Angus Reid Poll`)
+          .addTextResponse(`Canadian Values`)
           .addTextResponse(`Another Survey`)
           .addTextResponse(`Another Poll`)
           .addTextResponse(`No thanks`)
@@ -46,13 +46,12 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
   
-
   bot.onStartChattingMessage((incoming) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
           .addTextResponse(`Chicken`)
-          .addTextResponse(`Angus Reid Poll`)
+          .addTextResponse(`Canadian Values`)
           .addTextResponse(`Another Survey`)
           .addTextResponse(`Another Poll`)
           .addTextResponse(`No thanks`)
@@ -65,7 +64,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       .then((user) => {
         const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
           .addTextResponse(`Chicken`)
-          .addTextResponse(`Angus Reid Poll`)
+          .addTextResponse(`Canadian Values`)
           .addTextResponse(`Another Survey`)
           .addTextResponse(`Another Poll`)
           .addTextResponse(`No thanks`)
@@ -127,7 +126,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         results.update({
           user: user.username
         }, {
-          $set: {
+          $set: { {survey: 1}
             relationship: incoming.body
           }
         })
