@@ -75,7 +75,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         if (results.find({user: user.username}) === undefined) {
         results.insert({user: user.username})
         }
-        console.log(results.find({user: user.username})
+        console.log(results.find({user: user.username}))
         incoming.reply(message)
       });
   });
