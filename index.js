@@ -34,9 +34,9 @@ mongodb.MongoClient.connect(uri, function(err, db) {
   // });
 
    let bot = new Bot({
-    username: BOT_NAME,
-    apiKey: API_KEY,
-    baseUrl: BASE_URL
+    username: process.env.BOT_NAME,
+    apiKey: process.env.API_KEY,
+    baseUrl: process.env.BASE_URL
   });
 
   bot.updateBotConfiguration();
