@@ -20,10 +20,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
 
   var results = db.collection('results');
 
-  results.insert(seedData, function(err, result) {
+  // results.insert(seedData, function(err, result) {
 
-    if (err) throw err;
-  });
+  //   if (err) throw err;
+  // });
 
    let bot = new Bot({
     username: process.env.BOT_NAME,
@@ -75,6 +75,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
         if (results.find({user: user.username}) === undefined) {
         results.insert({user: user.username})
         }
+        console.log(results.find({user: user.username})
         incoming.reply(message)
       });
   });
