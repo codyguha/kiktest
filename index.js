@@ -5,8 +5,6 @@ let util = require('util');
 let http = require('http');
 let Bot = require('@kikinteractive/kik');
 
-var uri = 'mongodb://heroku_w9p37vp9:3huc3hgd51uauubr921v8ctb4l@ds053216.mlab.com:53216/heroku_w9p37vp9';
-
 var seedData = [{
   user: "",
   hungry: "",
@@ -16,16 +14,16 @@ var seedData = [{
   preference: ""
 }]
 
-mongodb.MongoClient.connect(uri, function(err, db) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
 
   if (err) throw err;
 
   var results = db.collection('results');
 
-  results.insert(seedData, function(err, result) {
+  // results.insert(seedData, function(err, result) {
 
-    if (err) throw err;
-  });
+  //   if (err) throw err;
+  // });
 
    let bot = new Bot({
     username: process.env.BOT_NAME,
