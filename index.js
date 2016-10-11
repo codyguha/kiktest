@@ -62,6 +62,19 @@ mongodb.MongoClient.connect(uri, function(err, db) {
       });
   });
 
+  bot.onScanDataMessage((incoming) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to complete.`)
+          .addTextResponse(`Chicken`)
+          .addTextResponse(`Angus Reid Poll`)
+          .addTextResponse(`Another Survey`)
+          .addTextResponse(`Another Poll`)
+          .addTextResponse(`No thanks`)
+        incoming.reply(message)
+      });
+  });
+
   bot.onTextMessage(/No thanks$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
