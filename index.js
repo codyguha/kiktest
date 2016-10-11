@@ -27,10 +27,16 @@ mongodb.MongoClient.connect(uri, function(err, db) {
     if (err) throw err;
   });
 
-  let bot = new Bot({
-    username: 'vclabs_surveybot',
-    apiKey: 'd117253a-66ec-4fbb-a1d5-5b07089d153f',
-    baseUrl: 'https://infinite-atoll-38383.herokuapp.com/'
+  // let bot = new Bot({
+  //   username: 'vclabs_surveybot',
+  //   apiKey: 'd117253a-66ec-4fbb-a1d5-5b07089d153f',
+  //   baseUrl: 'https://infinite-atoll-38383.herokuapp.com/'
+  // });
+
+   let bot = new Bot({
+    username: BOT_NAME,
+    apiKey: API_KEY,
+    baseUrl: BASE_URL
   });
 
   bot.updateBotConfiguration();
