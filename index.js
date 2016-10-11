@@ -214,14 +214,288 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Canadian Values$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Awesome lets get started. Canadian society should work towards...`)
+        const message = Bot.Message.text(`The Angus Reid Institute's national poll conducted in partnership with the CBC identifies five Canadian mindsets when it comes to values.  Please choose one answer for each of the following questions on a broad range of topics in Canadian life.  Your answers will determine with which of the five mindsets you are most aligned.`)
+          .addTextResponse(`Get Started`)
+          .addTextResponse(`No thanks`)
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Get Started$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Let's get started. Question 1 of 15: Canadian society should work towards...`)
           .addTextResponse(`Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)`)
           .addTextResponse(`More recognition of the importance of traditional families where a man is married to a woman`)
         return incoming.reply(message)
       });
   });
 
+  bot.onTextMessage(/Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 2 of 15: Canada's immigration and refugee policies should...`)
+          .addTextResponse(`Give priority to people in crisis abroad`)
+          .addTextResponse(`Give priority to Canada's own economic and workforce needs`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question1": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
 
+  bot.onTextMessage(/Give priority to people in crisis abroad|Give priority to Canada's own economic and workforce needs$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 3 of 15: In Canada, we should...`)
+          .addTextResponse(`Keep God and religion completely out of public life`)
+          .addTextResponse(`Publicly celebrate the role of faith in our collective lives`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question2": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace:`)
+          .addTextResponse(`Large public companies should be required to recruit and hire women so they're equally represented in senior management`)
+          .addTextResponse(`Leave it up to large public companies to make their own hiring decisions, even if it means fewer women in senior management`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question3": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Large public companies should be required to recruit and hire women so they're equally represented in senior management|Leave it up to large public companies to make their own hiring decisions, even if it means fewer women in senior management$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 5 of 15: Regarding health care, we should...`)
+          .addTextResponse(`Encourage private medical clinics outside of the public health care system to give Canadians more choice`)
+          .addTextResponse(`Prohibit private medical clinics outside of the public health care system to preserve the principle of equal access`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question4": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Encourage private medical clinics outside of the public health care system to give Canadians more choice|Prohibit private medical clinics outside of the public health care system to preserve the principle of equal access$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 6 of 15: Canada should...`)
+          .addTextResponse(`Expand policies aimed at improving the situation for Indigenous Canadians`)
+          .addTextResponse(`Work to remove any special status and programs for Indigenous Canadians`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question5": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Expand policies aimed at improving the situation for Indigenous Canadians|Work to remove any special status and programs for Indigenous Canadians$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 7 of 15: There should be...`)
+          .addTextResponse(`More public support for the poor, the disadvantaged and those in economic trouble`)
+          .addTextResponse(`More emphasis on a system that rewards hard work and initiative`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question6": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/More public support for the poor, the disadvantaged and those in economic trouble|More emphasis on a system that rewards hard work and initiative$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 8 of 15: Overall, Canada's policies should...`)
+          .addTextResponse(`Emphasize environmental protection over economic growth`)
+          .addTextResponse(`Emphasize economic growth over environmental protection`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question7": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Emphasize environmental protection over economic growth|Emphasize economic growth over environmental protection$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 9 of 15: Overall, it would be better to...`)
+          .addTextResponse(`Leave the economy more to the free market`)
+          .addTextResponse(`Have more government involvement and regulation of the economy`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question8": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Leave the economy more to the free market|Have more government involvement and regulation of the economy$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 10 of 15: On childcare, would you say...`)
+          .addTextResponse(`A national child care program is a needed investment in the next generation`)
+          .addTextResponse(`Leave it as the responsibility of parents to work out their own best child care options`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question9": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/A national child care program is a needed investment in the next generation|Leave it as the responsibility of parents to work out their own best child care options$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 11 of 15: When it comes to doctor-assisted dying...`)
+          .addTextResponse(`It should be easier for individual Canadians to make their own end-of-life decisions`)
+          .addTextResponse(`There should be lots of safeguards restricting access to doctor-assisted death`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question10": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/It should be easier for individual Canadians to make their own end-of-life decisions|There should be lots of safeguards restricting access to doctor-assisted death$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 12 of 15: Do you think of Canada's oil industry in Alberta and other parts of the country as:`)
+          .addTextResponse(`An overall liability because of the environmental risk`)
+          .addTextResponse(`An overall asset because of its contribution to the Canadian economy`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question11": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/An overall liability because of the environmental risk|An overall asset because of its contribution to the Canadian economy$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 13 of 15: Please indicate which one you think is more important for a child to have:`)
+          .addTextResponse(`Good manners`)
+          .addTextResponse(`Curiosity`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question12": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Good manners|Curiosity$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 14 of 15: In terms of individual success, would you say:`)
+          .addTextResponse(`People who are rich mostly got there through hard work`)
+          .addTextResponse(`People who are rich mostly got there through family connections or luck`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question13": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/People who are rich mostly got there through hard work|People who are rich mostly got there through family connections or luck$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Question 15 of 15: In your view:`)
+          .addTextResponse(`Most of the stories you see in the news can't be trusted`)
+          .addTextResponse(`News media do a good job presenting the facts`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question14": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Most of the stories you see in the news can't be trusted|News media do a good job presenting the facts$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`You are a !!!INSERT SEGMENT HERE!!!.  click below to read more about your segment`)
+          .addTextResponse(`Cautious Skeptics`)
+          .addTextResponse(`Faith Based Traditionalists`)
+          .addTextResponse(`Free Enterprise Enthusiasts`)
+          .addTextResponse(`Public Sector Proponents`)
+          .addTextResponse(`Permissive Reformers`)
+        results.update({
+          user: user.username
+        }, {
+          $set: {
+            "canadian_values.question15": incoming.body
+          }
+        })
+        return incoming.reply(message)
+      });
+  });
+
+  bot.onTextMessage(/Cautious Skeptics|Faith Based Traditionalists|Free Enterprise Enthusiasts|Public Sector Proponents|Permissive Reformers$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.link(`http://angusreid.org/cautious-skeptics/`)
+        return incoming.reply(message)
+      });
+  });
 
   let server = http
     .createServer(bot.incoming())
