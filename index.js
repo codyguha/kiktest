@@ -52,7 +52,7 @@ mongodb.MongoClient.connect(uri, function(err, db) {
   bot.onStartChattingMessage((incoming) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to complete.`)
+        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
           .addTextResponse(`Chicken`)
           .addTextResponse(`Angus Reid Poll`)
           .addTextResponse(`Another Survey`)
@@ -65,7 +65,7 @@ mongodb.MongoClient.connect(uri, function(err, db) {
   bot.onScanDataMessage((incoming) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to complete.`)
+        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
           .addTextResponse(`Chicken`)
           .addTextResponse(`Angus Reid Poll`)
           .addTextResponse(`Another Survey`)
