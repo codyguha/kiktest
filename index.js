@@ -500,12 +500,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Most of the stories you see in the news can't be trusted|News media do a good job presenting the facts$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`You are a !!!INSERT SEGMENT HERE!!!.  click below to read more about your segment`)
-          .addTextResponse(`Cautious Skeptics`)
-          .addTextResponse(`Faith Based Traditionalists`)
-          .addTextResponse(`Free Enterprise Enthusiasts`)
-          .addTextResponse(`Public Sector Proponents`)
-          .addTextResponse(`Permissive Reformers`)
+        const message = Bot.Message.text(`You are a "Cautious Skeptic".  Click below to read more about your segment`)
+        const link = Bot.Message.link(`http://angusreid.org/cautious-skeptics/`)
         results.update({
           user: user.username
         }, {
@@ -513,15 +509,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
             "canadian_values.question15": incoming.body
           }
         })
-        return incoming.reply(message)
-      });
-  });
-
-  bot.onTextMessage(/Cautious Skeptics|Faith Based Traditionalists|Free Enterprise Enthusiasts|Public Sector Proponents|Permissive Reformers$/i, (incoming, next) => {
-    bot.getUserProfile(incoming.from)
-      .then((user) => {
-        const message = Bot.Message.link(`http://angusreid.org/cautious-skeptics/`)
-        return incoming.reply(message)
+        return incoming.reply([message, link])
       });
   });
 
