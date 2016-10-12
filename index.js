@@ -247,13 +247,13 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`(1/15) Canadian society should work towards...`)
-          .addTextResponse(`Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)`)
+          .addTextResponse(`Greater acceptance of people who are LGBTQ`)
           .addTextResponse(`More recognition of the importance of traditional families where a man is married to a woman`)
         return incoming.reply(message)
       });
   });
 
-  bot.onTextMessage(/Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
+  bot.onTextMessage(/Greater acceptance of people who are LGBTQ|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`(2/15) Canada's immigration and refugee policies should...`)
