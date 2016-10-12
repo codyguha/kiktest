@@ -259,7 +259,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
+  bot.onTextMessage(/^Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Question 2 of 15: Canada's immigration and refugee policies should...`)
