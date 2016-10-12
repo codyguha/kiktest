@@ -37,10 +37,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Hello again ${user.firstName}! Please choose a survey to complete.`)
-          .addTextResponse(`Chicken`)
-          .addTextResponse(`Canadian Values`)
-          .addTextResponse(`Another Survey`)
-          .addTextResponse(`Another Poll`)
+          .addTextResponse(`Chicken Survey`)
+          .addTextResponse(`Canadian Values Index`)
           .addTextResponse(`No thanks`)
         incoming.reply(message)
       });
@@ -50,10 +48,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
-          .addTextResponse(`Chicken`)
-          .addTextResponse(`Canadian Values`)
-          .addTextResponse(`Another Survey`)
-          .addTextResponse(`Another Poll`)
+          .addTextResponse(`Chicken Survey`)
+          .addTextResponse(`Canadian Values Index`)
           .addTextResponse(`No thanks`)
         incoming.reply(message)
         results.insert({user: user.username})
@@ -65,17 +61,15 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
-          .addTextResponse(`Chicken`)
-          .addTextResponse(`Canadian Values`)
-          .addTextResponse(`Another Survey`)
-          .addTextResponse(`Another Poll`)
+          .addTextResponse(`Chicken Survey`)
+          .addTextResponse(`Canadian Values Index`)
           .addTextResponse(`No thanks`)
         incoming.reply(message)
         results.insert({user: user.username})
       });
   });
 
-  bot.onTextMessage(/Chicken$/i, (incoming, next) => {
+  bot.onTextMessage(/Chicken Survey$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Awesome lets get started. What would you say your relationship is with fried chicken?`)
@@ -239,7 +233,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
 
   //// CANADIAN VALUES SURVEY
 
-  bot.onTextMessage(/Canadian Values$/i, (incoming, next) => {
+  bot.onTextMessage(/Canadian Values Index$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`The Angus Reid Institute's national poll conducted in partnership with the CBC identifies five Canadian mindsets when it comes to values.  Please choose one answer for each of the following questions on a broad range of topics in Canadian life.  Your answers will determine with which of the five mindsets you are most aligned.`)
@@ -252,24 +246,24 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Get Started$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Let's get started. Question 1 of 15: Canadian society should work towards...`)
-          .addTextResponse(`Greater acceptance of people who are LGBTQ`)
+        const message = Bot.Message.text(`(1/15) Canadian society should work towards...`)
+          .addTextResponse(`Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)`)
           .addTextResponse(`More recognition of the importance of traditional families where a man is married to a woman`)
         return incoming.reply(message)
       });
   });
 
-  bot.onTextMessage(/^Greater acceptance of people who are LGBTQ|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
+  bot.onTextMessage(/Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 2 of 15: Canada's immigration and refugee policies should...`)
+        const message = Bot.Message.text(`(2/15) Canada's immigration and refugee policies should...`)
           .addTextResponse(`Give priority to people in crisis abroad`)
           .addTextResponse(`Give priority to Canada's own economic and workforce needs`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question1": incoming.body
+            "canadian_values.question01": incoming.body
           }
         })
         return incoming.reply(message)
@@ -279,31 +273,31 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/^Give priority to people in crisis abroad|Give priority to Canada's own economic and workforce needs$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 3 of 15: In Canada, we should...`)
+        const message = Bot.Message.text(`(3/15) In Canada, we should...`)
           .addTextResponse(`Keep God and religion completely out of public life`)
           .addTextResponse(`Publicly celebrate the role of faith in our collective lives`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question2": incoming.body
+            "canadian_values.question02": incoming.body
           }
         })
         return incoming.reply(message)
       });
   });
 
-  bot.onTextMessage(/^Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
+  bot.onTextMessage(/Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace, Large public companies should...`)
+        const message = Bot.Message.text(`(4/15) In the Canadian workplace, Large public companies should...`)
           .addTextResponse(`Be required to recruit and hire women so they're equally represented in senior management`)
           .addTextResponse(`Make their own hiring decisions, even if it means fewer women in senior management`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question3": incoming.body
+            "canadian_values.question03": incoming.body
           }
         })
         incoming.reply(message)
@@ -313,14 +307,14 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Be required to recruit and hire women so they're equally represented in senior management|Make their own hiring decisions, even if it means fewer women in senior management$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 5 of 15: Regarding health care outside of the public health care system, we should...`)
+        const message = Bot.Message.text(`(5/15) Regarding health care outside of the public health care system, we should...`)
           .addTextResponse(`Encourage private medical clinics to give Canadians more choice`)
           .addTextResponse(`Prohibit private medical clinics to preserve the principle of equal access`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question4": incoming.body
+            "canadian_values.question04": incoming.body
           }
         })
         return incoming.reply(message)
@@ -330,14 +324,14 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Encourage private medical clinics to give Canadians more choice|Prohibit private medical clinics to preserve the principle of equal access$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 6 of 15: Canada should...`)
+        const message = Bot.Message.text(`(6/15) Canada should...`)
           .addTextResponse(`Expand policies aimed at improving the situation for Indigenous Canadians`)
           .addTextResponse(`Work to remove any special status and programs for Indigenous Canadians`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question5": incoming.body
+            "canadian_values.question05": incoming.body
           }
         })
         return incoming.reply(message)
@@ -347,14 +341,14 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Expand policies aimed at improving the situation for Indigenous Canadians|Work to remove any special status and programs for Indigenous Canadians$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 7 of 15: There should be...`)
+        const message = Bot.Message.text(`(7/15) There should be...`)
           .addTextResponse(`More public support for the poor, the disadvantaged and those in economic trouble`)
           .addTextResponse(`More emphasis on a system that rewards hard work and initiative`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question6": incoming.body
+            "canadian_values.question06": incoming.body
           }
         })
         return incoming.reply(message)
@@ -364,7 +358,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/More public support for the poor, the disadvantaged and those in economic trouble|More emphasis on a system that rewards hard work and initiative$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 8 of 15: Overall, Canada's policies should...`)
+        const message = Bot.Message.text(`(8/15) Overall, Canada's policies should...`)
           .addTextResponse(`Emphasize environmental protection over economic growth`)
           .addTextResponse(`Emphasize economic growth over environmental protection`)
         results.update({
@@ -381,14 +375,14 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Emphasize environmental protection over economic growth|Emphasize economic growth over environmental protection$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 9 of 15: Overall, it would be better to...`)
+        const message = Bot.Message.text(`(9/15) Overall, it would be better to...`)
           .addTextResponse(`Leave the economy more to the free market`)
           .addTextResponse(`Have more government involvement and regulation of the economy`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question8": incoming.body
+            "canadian_values.question08": incoming.body
           }
         })
         return incoming.reply(message)
@@ -398,14 +392,14 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Leave the economy more to the free market|Have more government involvement and regulation of the economy$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 10 of 15: On childcare, would you say...`)
+        const message = Bot.Message.text(`(10/15) On childcare, would you say...`)
           .addTextResponse(`A national child care program is a needed investment in the next generation`)
           .addTextResponse(`Leave it as the responsibility of parents to work out their own best child care options`)
         results.update({
           user: user.username
         }, {
           $set: {
-            "canadian_values.question9": incoming.body
+            "canadian_values.question09": incoming.body
           }
         })
         return incoming.reply(message)
@@ -415,7 +409,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/A national child care program is a needed investment in the next generation|Leave it as the responsibility of parents to work out their own best child care options$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 11 of 15: When it comes to doctor-assisted dying...`)
+        const message = Bot.Message.text(`(11/15) When it comes to doctor-assisted dying...`)
           .addTextResponse(`It should be easier for individual Canadians to make their own end-of-life decisions`)
           .addTextResponse(`There should be lots of safeguards restricting access to doctor-assisted death`)
         results.update({
@@ -432,7 +426,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/It should be easier for individual Canadians to make their own end-of-life decisions|There should be lots of safeguards restricting access to doctor-assisted death$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 12 of 15: Do you think of Canada's oil industry in Alberta and other parts of the country as:`)
+        const message = Bot.Message.text(`(12/15) Do you think of Canada's oil industry in Alberta and other parts of the country as:`)
           .addTextResponse(`An overall liability because of the environmental risk`)
           .addTextResponse(`An overall asset because of its contribution to the Canadian economy`)
         results.update({
@@ -449,7 +443,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/An overall liability because of the environmental risk|An overall asset because of its contribution to the Canadian economy$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 13 of 15: Please indicate which one you think is more important for a child to have:`)
+        const message = Bot.Message.text(`(13/15) Please indicate which one you think is more important for a child to have:`)
           .addTextResponse(`Good manners`)
           .addTextResponse(`Curiosity`)
         results.update({
@@ -466,7 +460,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/Good manners|Curiosity$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 14 of 15: In terms of individual success, would you say:`)
+        const message = Bot.Message.text(`(14/15) In terms of individual success, would you say:`)
           .addTextResponse(`People who are rich mostly got there through hard work`)
           .addTextResponse(`People who are rich mostly got there through family connections or luck`)
         results.update({
@@ -483,7 +477,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/People who are rich mostly got there through hard work|People who are rich mostly got there through family connections or luck$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 15 of 15: In your view:`)
+        const message = Bot.Message.text(`(15/15) In your view:`)
           .addTextResponse(`Most of the stories you see in the news can't be trusted`)
           .addTextResponse(`News media do a good job presenting the facts`)
         results.update({
