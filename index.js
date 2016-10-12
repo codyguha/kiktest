@@ -220,7 +220,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
  bot.onTextMessage(/no, I ate|YES!$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Thanks for your time. Say "hi" or "GET chicken" to take the survey or get chicken.`)
+        const message = Bot.Message.text(`Thanks for your time. Say "hi" to take another survey.`)
         const hifive = Bot.Message.video(`http://media.giphy.com/media/uXNYDeQ20XWSs/giphy.gif`)
           .setAttributionName(' ')
           .setLoop(true)
@@ -253,13 +253,13 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Let's get started. Question 1 of 15: Canadian society should work towards...`)
-          .addTextResponse(`Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)`)
+          .addTextResponse(`Greater acceptance of people who are LGBTQ`)
           .addTextResponse(`More recognition of the importance of traditional families where a man is married to a woman`)
         return incoming.reply(message)
       });
   });
 
-  bot.onTextMessage(/^Greater acceptance of people who are LGBTQ (lesbian, gay, bi-sexual, transgender, queer)|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
+  bot.onTextMessage(/^Greater acceptance of people who are LGBTQ|More recognition of the importance of traditional families where a man is married to a woman$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Question 2 of 15: Canada's immigration and refugee policies should...`)
@@ -276,7 +276,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Give priority to people in crisis abroad|Give priority to Canada's own economic and workforce needs$/i, (incoming, next) => {
+  bot.onTextMessage(/^Give priority to people in crisis abroad|Give priority to Canada's own economic and workforce needs$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Question 3 of 15: In Canada, we should...`)
@@ -293,7 +293,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
+  bot.onTextMessage(/^Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace:`)
