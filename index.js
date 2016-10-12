@@ -293,7 +293,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Keep God and religion completely out of public life | Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
+  bot.onTextMessage(/^Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace`)
@@ -306,7 +306,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
             "canadian_values.question3": incoming.body
           }
         })
-        return incoming.reply(message)
+        incoming.reply(message)
       });
   });
 
