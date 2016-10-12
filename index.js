@@ -56,7 +56,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Hello again ${user.firstName}! Please choose a survey to complete.`)
-          .addTextResponse(`Chicken Survey`)
+          .addTextResponse(`Chicken`)
           .addTextResponse(`Canadian Values Index`)
           .addTextResponse(`No thanks`)
         incoming.reply(message)
@@ -67,7 +67,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
-          .addTextResponse(`Chicken Survey`)
+          .addTextResponse(`Chicken`)
           .addTextResponse(`Canadian Values Index`)
           .addTextResponse(`No thanks`)
         incoming.reply(message)
