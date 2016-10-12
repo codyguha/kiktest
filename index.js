@@ -88,7 +88,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/@surveychicken Chicken Survey$/i, (incoming, next) => {
+  bot.onTextMessage(/^Chicken Survey$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`ok ${user.firstName}! I will summon the survey chicken for you ! `)
