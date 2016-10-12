@@ -327,7 +327,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Encourage private medical clinics outside of the public health care system to give Canadians more choice|Prohibit private medical clinics outside of the public health care system to preserve the principle of equal access$/i, (incoming, next) => {
+  bot.onTextMessage(/Encourage private medical clinics to give Canadians more choice|Prohibit private medical clinics to preserve the principle of equal access$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
         const message = Bot.Message.text(`Question 6 of 15: Canada should...`)
