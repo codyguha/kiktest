@@ -296,9 +296,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   bot.onTextMessage(/^Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace:`)
-          .addTextResponse(`Large management`)
-          .addTextResponse(`Leave omen in senior management`)
+        const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace, Large public companies should...`)
+          .addTextResponse(`Be required to recruit and hire women so they're equally represented in senior management`)
+          .addTextResponse(`Make their own hiring decisions, even if it means fewer women in senior management`)
         results.update({
           user: user.username
         }, {
@@ -310,12 +310,12 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Large public companies should be required to recruit and hire women so they're equally represented in senior management|Leave it up to large public companies to make their own hiring decisions, even if it means fewer women in senior management$/i, (incoming, next) => {
+  bot.onTextMessage(/Be required to recruit and hire women so they're equally represented in senior management|Make their own hiring decisions, even if it means fewer women in senior management$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 5 of 15: Regarding health care, we should...`)
-          .addTextResponse(`Encourage private medical clinics outside of the public health care system to give Canadians more choice`)
-          .addTextResponse(`Prohibit private medical clinics outside of the public health care system to preserve the principle of equal access`)
+        const message = Bot.Message.text(`Question 5 of 15: Regarding health care outside of the public health care system, we should...`)
+          .addTextResponse(`Encourage private medical clinics to give Canadians more choice`)
+          .addTextResponse(`Prohibit private medical clinics to preserve the principle of equal access`)
         results.update({
           user: user.username
         }, {
