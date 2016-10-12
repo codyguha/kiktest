@@ -293,10 +293,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/^Keep God and religion completely out of public life|Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
+  bot.onTextMessage(/Keep God and religion completely out of public life | Publicly celebrate the role of faith in our collective lives$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace:`)
+        const message = Bot.Message.text(`Question 4 of 15: In the Canadian workplace`)
           .addTextResponse(`Large public companies should be required to recruit and hire women so they're equally represented in senior management`)
           .addTextResponse(`Leave it up to large public companies to make their own hiring decisions, even if it means fewer women in senior management`)
         results.update({
