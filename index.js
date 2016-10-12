@@ -88,10 +88,10 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
       });
   });
 
-  bot.onTextMessage(/Chicken Survey$/i, (incoming, next) => {
+  bot.onTextMessage(/Chicken$/i, (incoming, next) => {
     bot.getUserProfile(incoming.from)
       .then((user) => {
-        const message = Bot.Message.text(`my friend @surveychicken can help with this`)
+        const message = Bot.Message.text(`@surveychicken chicken survey`)
         return incoming.reply(message)
       });
   });
