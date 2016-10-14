@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+        <title>Test Page</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+        <style>
+            html, body {
+                width: 220px;
+                height: 320px;
+                background: #fff;
+            }
+            button {
+                -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+                -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+                box-shadow: inset 0px 1px 0px 0px #ffffff;
+                background-color: #fff;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border-radius: 6px;
+                border: 1px solid #DBDADA;
+                display: inline-block;
+                cursor: pointer;
+                color: #A9A9A9;
+                letter-spacing: 1px;
+                font-family: "Open Sans Condensed", Sans-Serif;
+                font-weight: 300;
+                text-transform: uppercase;
+                font-size: 15px;
+                box-shadow: none;
+                padding: 8px 8px;
+                line-height: 20px;
+                text-decoration: none;
+                margin: 3px 3px;
+                text-align: center;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+
+            button:focus, button:active {
+                outline:0;
+                background: #eeeeee;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            }
+
+            button.done-button {
+                color: #fff;
+                border: none;
+            }
+
+            #end {
+                position: absolute;
+                left: 7px;
+                top: 270px;
+            }
+
+            #done-button {
+                background-color: #3194e7;
+                padding: 10px;
+                width: 200px;
+            }
+
+            #tags {
+                width: 210px;
+                position: absolute;
+                top: 5px;
+                left: 5px;
+            }
+            </style>
+    </head>
+    <body>
+        <div id="test"></div>
+        <div id="tags"></div>
+        <div id="end">
+            <button type="button" id='done-button' class="done-button" onclick="finishTagSelection()">Done!</button>
+        </div>
+        <script>
+
+            var tags = ['Neutrals', 'Blacks', 'Blues', 'Warm', 'Everyday', 'Street', 'Chic', 'Party', 'Preppy', 'Comfortable', 'Menstyle', 'Athletic', 'Grunge', 'Summer', 'Business'];
+            var user = "codyguha";
+            var selected_tags = [];
+
+            function finishTagSelection() {
+                for (var i = 0; i < tags.length; i++) {
+                    if (selected_tags.indexOf(tags[i]) !== -1) {
+                        document.getElementById(tags[i]).style.color = "#AAAAAA";
+                    }
+                    document.getElementById(tags[i]).disabled = true;
+                }
+                document.getElementById('done-button').disabled = true;
+                document.getElementById('done-button').style.backgroundColor = "#CDCDCD";
+                if (!isDone) {
+                    var xhttp1 = new XMLHttpRequest();
+                    xhttp1.open("GET", "/api/ended_widget?user=" + user, true);
+                    xhttp1.send();
+                }
+            }
+
+            function handleTagClick(name) {
+                if (selected_tags.indexOf(name) !== -1 || selected_tags.length > 2) {
+                    var i = selected_tags.indexOf(name);
+                    if (i !== -1) {
+                        selected_tags.splice(i, 1);
+                    }
+                    document.getElementById(name).style.backgroundColor = "#fff";
+                    document.getElementById(name).style.color = "#A9A9A9"
+
+                } else {
+                    selected_tags.push(name);
+                    document.getElementById(name).style.backgroundColor = "#eee";
+                    document.getElementById(name).style.color = "#000000"
+                }
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                        var i;
+                        var response_temp = xhttp.responseText.split(",");
+                        for(i=0; i<response_temp.length; i++){
+                            var name = response_temp[i];
+                            if (name) {
+                                document.getElementById(name).style.backgroundColor = "#eee";
+                            }
+                        }
+                    }
+                };
+                xhttp.open("GET", "/api/save_list?user=" + user + "&lst="+selected_tags, true);
+                xhttp.send();
+            }
+            var x ="", i, name;
+            for (i = 0; i < tags.length; i++) {
+                name = tags[i];
+                x = x + "<button type=\"button\" id=\""+name+"\">" + name + "</button>";
+            }
+            document.getElementById("tags").innerHTML = x;
+            for (i = 0; i < tags.length; i++) {
+                name = tags[i];
+                document.getElementById(name).addEventListener("touchstart", function(e) {
+                    console.log(e);
+                     handleTagClick(e.srcElement.id);
+                }, true);
+            }
+
+
+            for (i = 0; i < selected_tags.length; i++) {
+                name = selected_tags[i];
+                document.getElementById(name).style.backgroundColor = "#eee";
+                document.getElementById(name).style.color = "#000000"
+            }
+            isDone = false;
+            if (isDone) {
+                finishTagSelection();
+            }
+        </script>
+    </body>
+</html>
