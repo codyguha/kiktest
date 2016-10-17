@@ -54,8 +54,12 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
 
   bot.onTextMessage((incoming, next) => {
         console.log(incoming)
-        const link = Bot.Message.link(`http://angusreid.org/canadian-values-index/`)
+        const link = Bot.Message.link(`http://angusreid.org/wp-content/uploads/2016/09/index.html`)
         incoming.reply(link)
+  });
+
+  bot.onLinkMessage((incoming, next) => {
+        console.log(incoming)
   });
 
 
