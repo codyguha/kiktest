@@ -63,58 +63,58 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
   });
 
 
-  // bot.onTextMessage(/Hi$/i, (incoming, next) => {
-  //   bot.getUserProfile(incoming.from)
-  //     .then((user) => {
-  //       const message = Bot.Message.text(`Hello again ${user.firstName}! Please choose a survey to complete.`)
-  //         .addTextResponse(`@surveychicken Chicken Survey`)
-  //         .addTextResponse(`Canadian Values Index`)
-  //         .addTextResponse(`No thanks`)
-  //       incoming.reply(message)
-  //       console.log(incoming)
-  //     });
-  // });
+  bot.onTextMessage(/Hi$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Hello again ${user.firstName}! Please choose a survey to complete.`)
+          .addTextResponse(`@surveychicken Chicken Survey`)
+          .addTextResponse(`Canadian Values Index`)
+          .addTextResponse(`No thanks`)
+        incoming.reply(message)
+        console.log(incoming)
+      });
+  });
   
-  // bot.onStartChattingMessage((incoming) => {
-  //   bot.getUserProfile(incoming.from)
-  //     .then((user) => {
-  //       const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
-  //         .addTextResponse(`@surveychicken Chicken Survey`)
-  //         .addTextResponse(`Canadian Values Index`)
-  //         .addTextResponse(`No thanks`)
-  //       incoming.reply(message)
-  //       results.insert({user: user.username})
-  //     });
+  bot.onStartChattingMessage((incoming) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
+          .addTextResponse(`@surveychicken Chicken Survey`)
+          .addTextResponse(`Canadian Values Index`)
+          .addTextResponse(`No thanks`)
+        incoming.reply(message)
+        results.insert({user: user.username})
+      });
     
-  // });
+  });
 
-  // bot.onScanDataMessage((incoming) => {
-  //   bot.getUserProfile(incoming.from)
-  //     .then((user) => {
-  //       const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
-  //         .addTextResponse(`@surveychicken Chicken Survey`)
-  //         .addTextResponse(`Canadian Values Index`)
-  //         .addTextResponse(`No thanks`)
-  //       incoming.reply(message)
-  //       results.insert({user: user.username})
-  //     });
-  // });
+  bot.onScanDataMessage((incoming) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`Hey ${user.firstName}! I am the VC Labs survey bot.  You can complete surveys with me. Please choose a survey to begin.`)
+          .addTextResponse(`@surveychicken Chicken Survey`)
+          .addTextResponse(`Canadian Values Index`)
+          .addTextResponse(`No thanks`)
+        incoming.reply(message)
+        results.insert({user: user.username})
+      });
+  });
 
-  // bot.onTextMessage(/^Chicken Survey$/i, (incoming, next) => {
-  //   bot.getUserProfile(incoming.from)
-  //     .then((user) => {
-  //       const message = Bot.Message.text(`ok ${user.firstName}! I will summon the survey chicken for you ! `)
-  //       incoming.reply(message)
-  //     });
-  // });
+  bot.onTextMessage(/^Chicken Survey$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`ok ${user.firstName}! I will summon the survey chicken for you ! `)
+        incoming.reply(message)
+      });
+  });
 
-  // bot.onTextMessage(/No thanks$/i, (incoming, next) => {
-  //   bot.getUserProfile(incoming.from)
-  //     .then((user) => {
-  //       const message = Bot.Message.text(`ok ${user.firstName}! say "Hi" agian sometime `)
-  //       incoming.reply(message)
-  //     });
-  // });
+  bot.onTextMessage(/No thanks$/i, (incoming, next) => {
+    bot.getUserProfile(incoming.from)
+      .then((user) => {
+        const message = Bot.Message.text(`ok ${user.firstName}! say "Hi" agian sometime `)
+        incoming.reply(message)
+      });
+  });
 
   //// CANADIAN VALUES SURVEY
 
