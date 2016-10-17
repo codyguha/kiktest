@@ -60,6 +60,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
           .addTextResponse(`Canadian Values Index`)
           .addTextResponse(`No thanks`)
         incoming.reply(message)
+        console.log(incoming)
       });
   });
   
