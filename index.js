@@ -54,7 +54,6 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI, function(err, db) {
 
   bot.onTextMessage((incoming, next) => {
         console.log(incoming)
-      });
   });
 
 
